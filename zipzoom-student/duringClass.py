@@ -182,6 +182,7 @@ class ClassHandle:
 
         # 퀴즈 답 세팅
         multi_idx = idx = -1
+        s_idx = -1
 
         with pyvirtualcam.Camera(width, height, fps_out, fmt=PixelFormat.BGR, print_fps=args.fps) as cam:
             print(
@@ -200,12 +201,12 @@ class ClassHandle:
                 frame, sleep = FD.detect(frame, wake)
 
                 if sleep: #졸음 감지했을 때
-                    frame, idx = GA.detect(frame)
-                    if idx == 5: #손바닥을 보임
+                    frame, s_idx = GA.detect(frame)
+                    if s_idx == 5: #손바닥을 보임
                         wake = True
                 else:
                     wake = False
-                    idx = -1
+                    s_idx = -1
                     
                 # 퀴즈가 시작되면 손 인식 시작
                 # 퀴즈가 끝나면 손 인식 종료
