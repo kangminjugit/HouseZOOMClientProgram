@@ -205,6 +205,7 @@ class ClassHandle:
                         wake = True
                 else:
                     wake = False
+                    idx = -1
                     
                 # 퀴즈가 시작되면 손 인식 시작
                 # 퀴즈가 끝나면 손 인식 종료
