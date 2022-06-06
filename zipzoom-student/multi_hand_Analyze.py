@@ -27,7 +27,7 @@ class multi_hand_analyzer:
         self.knn = cv2.ml.KNearest_create()
         self.knn.train(self.angle, cv2.ml.ROW_SAMPLE, self.label)
 
-    def detect(self, img):
+    def detect(self, img, is_ox = False):
 
         idx = -1
 
@@ -112,8 +112,9 @@ class multi_hand_analyzer:
                     idx = int(results[0][0])
 
                     # 숫자, 좋아요, 싫어요, 손하트, OK
-                    cv2.putText(img, text=self.gesture[idx].upper(), org=(int(hand.landmark[0].x * img.shape[1]), int(
-                        hand.landmark[0].y * img.shape[0] + 20)), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(255, 255, 255), thickness=2)
+                    if is_ox:
+                        cv2.putText(img, text=self.gesture[idx].upper(), org=(int(hand.landmark[0].x * img.shape[1]), int(
+                            hand.landmark[0].y * img.shape[0] + 20)), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(255, 255, 255), thickness=2)
 
                 # self.mp_drawing.draw_landmarks(img, res, self.mp_hands.HAND_CONNECTIONS) # 손마디 랜드마크 표시
 

@@ -34,7 +34,7 @@ class gesture_analyzer:
         self.knn = cv2.ml.KNearest_create()
         self.knn.train(self.angle, cv2.ml.ROW_SAMPLE, self.label)
 
-    def detect(self, img):
+    def detect(self, img, is_ox=True):
 
         # 프레임을 좌우전환 후 RGB로 변환
         img = cv2.flip(img, 1)
@@ -77,8 +77,9 @@ class gesture_analyzer:
                 #cv2.putText(img, text=self.rps_gesture[idx].upper(), org=(int(res.landmark[0].x * img.shape[1]), int(res.landmark[0].y * img.shape[0] + 20)), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(255, 255, 255), thickness=2)
 
                 # 숫자, 좋아요, 싫어요, 손하트, OK
-                cv2.putText(img, text=self.gesture[self.idx].upper(), org=(int(res.landmark[0].x * img.shape[1]), int(
-                    res.landmark[0].y * img.shape[0] + 20)), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(255, 255, 255), thickness=2)
+                if is_ox == False:
+                    cv2.putText(img, text=self.gesture[self.idx].upper(), org=(int(res.landmark[0].x * img.shape[1]), int(
+                        res.landmark[0].y * img.shape[0] + 20)), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(255, 255, 255), thickness=2)
 
                 # self.mp_drawing.draw_landmarks(img, res, self.mp_hands.HAND_CONNECTIONS) # 손마디 랜드마크 표시
 

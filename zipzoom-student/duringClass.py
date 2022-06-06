@@ -200,14 +200,14 @@ class ClassHandle:
                 # 얼굴 눈 찾기
                 frame, sleep = FD.detect(frame, wake)
 
-                if sleep: #졸음 감지했을 때
+                if sleep:  # 졸음 감지했을 때
                     frame, s_idx = GA.detect(frame)
-                    if s_idx == 5: #손바닥을 보임
+                    if s_idx == 5:  # 손바닥을 보임
                         wake = True
                 else:
                     wake = False
                     s_idx = -1
-                    
+
                 # 퀴즈가 시작되면 손 인식 시작
                 # 퀴즈가 끝나면 손 인식 종료
                 if hand_detect != self.quizOn:
@@ -284,4 +284,3 @@ class ClassHandle:
                 #     break
 
         vc.release()
-

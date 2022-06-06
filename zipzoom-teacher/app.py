@@ -1,5 +1,5 @@
-from asyncio.windows_events import NULL
-from email import header
+# from asyncio.windows_events import NULL
+# from email import header
 import eel
 import requests
 import socketio
@@ -152,7 +152,9 @@ def get_quizResult(classId):
     result = mongo['housezoom']['room'].find_one(filter)
 
     if result:
-        studentAnswerArr = result['studentAnswerArr']
+        studentAnswerArr = []
+        if 'studentAnswerArr' in result:
+            studentAnswerArr = result['studentAnswerArr']
         quizArr = result['quizArr']
 
         # print(result)
@@ -161,4 +163,4 @@ def get_quizResult(classId):
         return NULL
 
 
-eel.start('index.html', port=8090)
+eel.start('index.html', port=1090)
