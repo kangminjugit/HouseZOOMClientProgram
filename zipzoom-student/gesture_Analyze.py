@@ -15,8 +15,6 @@ class gesture_analyzer:
             6: 'good', 7: 'bad', 8: 'heart', 9: 'ok'
         }  # 9가지 제스처, 제스처 데이터는 손가락 관절의 각도와 각각의 라벨을 뜻함.
 
-        self.rps_gesture = {0: 'rock', 2: 'scissors', 5: 'paper'}  # 가위바위보
-
         self.heart = Heart()
 
         # MediaPipe hands model
@@ -72,10 +70,6 @@ class gesture_analyzer:
                 ret, results, neighbours, dist = self.knn.findNearest(data, 3)
                 self.idx = int(results[0][0])
 
-                # Draw gesture result 가위바위보
-                # if idx in rps_gesture.keys():
-                #cv2.putText(img, text=self.rps_gesture[idx].upper(), org=(int(res.landmark[0].x * img.shape[1]), int(res.landmark[0].y * img.shape[0] + 20)), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(255, 255, 255), thickness=2)
-
                 # 숫자, 좋아요, 싫어요, 손하트, OK
                 if is_ox == False:
                     cv2.putText(img, text=self.gesture[self.idx].upper(), org=(int(res.landmark[0].x * img.shape[1]), int(
@@ -87,7 +81,8 @@ class gesture_analyzer:
                     img = cv2.flip(img, 1)
                     img = self.heart.add_heart(img)
                     img = cv2.flip(img, 1)
-        # else:
+        else:
+            self.idx = -1
             #img = cv2.flip(img, 1)
 
         img = cv2.flip(img, 1)
