@@ -9,7 +9,7 @@ from pymongo import MongoClient
 eel.init('web')
 
 sio = socketio.Client()
-sio.connect('http://3.35.141.211:4040')
+sio.connect('http://13.125.141.137:4040')
 # sio.connect('http://localhost:4040')
 
 
@@ -22,7 +22,7 @@ sio.on('quiz_timeout', quizTimeoutHandler)
 
 @eel.expose
 def login(id, password):
-    response = requests.post('http://3.35.141.211:3000/api/login/teacher', data={
+    response = requests.post('http://13.125.141.137:3000/api/login/teacher', data={
         'id': id,
         'password': password
     })
@@ -33,7 +33,7 @@ def login(id, password):
 @eel.expose
 def get_timeTable(classId):
     response = requests.get(
-        'http://3.35.141.211:3000/api/time-table?classId=%d' % classId)
+        'http://13.125.141.137:3000/api/time-table?classId=%d' % classId)
     response = response.json()
     return response
 
@@ -42,7 +42,7 @@ def get_timeTable(classId):
 def get_studentTable(classId, accessToken):
     headers = {"Authorization": "Bearer %s" % accessToken}
     response = requests.get(
-        'http://3.35.141.211:3000/api/student?classId=%d' % classId, headers=headers)
+        'http://13.125.141.137:3000/api/student?classId=%d' % classId, headers=headers)
     response = response.json()
     print(response)
     return response
@@ -138,14 +138,14 @@ def giveChoiceQuiz(classId, teacherID, accessToken, problem, multiChoices, answe
 def get_classList(accessToken):
     headers = {"Authorization": "Bearer %s" % accessToken}
     response = requests.get(
-        'http://3.35.141.211:3000/api/class/my-class', headers=headers)
+        'http://13.125.141.137:3000/api/class/my-class', headers=headers)
     return response.json()
 
 
 @eel.expose
 def get_quizResult(classId):
     mongo = MongoClient(
-        'mongodb://ec2-3-38-116-33.ap-northeast-2.compute.amazonaws.com', 27017)
+        'mongodb://ec2-13-209-14-200.ap-northeast-2.compute.amazonaws.com', 27017)
     print(mongo)
 
     filter = {'classId': classId}
