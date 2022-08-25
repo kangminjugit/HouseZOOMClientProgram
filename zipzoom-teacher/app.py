@@ -9,7 +9,7 @@ from pymongo import MongoClient
 eel.init('web')
 
 sio = socketio.Client()
-sio.connect('http://13.125.141.137:4040')
+sio.connect('http://52.79.149.204:4040')
 # sio.connect('http://localhost:4040')
 
 

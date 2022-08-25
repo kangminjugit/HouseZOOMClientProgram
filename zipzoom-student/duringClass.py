@@ -31,7 +31,7 @@ class ClassHandle:
         self.quizOn = False
 
         self.sio = socketio.Client()
-        self.sio.connect('http://3.35.141.211:4040')
+        self.sio.connect('http://52.79.149.204:4040')
         # self.sio.connect('http://localhost:4040')
         self.sio.emit('student_join_class', {
             'data': {

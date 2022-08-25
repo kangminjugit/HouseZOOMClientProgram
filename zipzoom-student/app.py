@@ -8,7 +8,7 @@ eel.init('web')
 
 @eel.expose
 def login(id, password):
-    response = requests.post('http://3.35.141.211:3000/api/login/student', data={
+    response = requests.post('http://13.125.141.137:3000/api/login/student', data={
         'id': id,
         'password': password
     })
@@ -19,7 +19,7 @@ def login(id, password):
 @eel.expose
 def get_timeTable(classId):
     response = requests.get(
-        'http://3.35.141.211:3000/api/time-table?classId=%d' % classId)
+        'http://13.125.141.137:3000/api/time-table?classId=%d' % classId)
     response = response.json()
     return response
 
