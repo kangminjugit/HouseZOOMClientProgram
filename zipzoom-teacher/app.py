@@ -95,6 +95,7 @@ def giveBadge(accessToken, studentId, point, subject, description, classId):
 
 @eel.expose
 def giveOXQuiz(classId, teacherID, accessToken, problem, answer, timeLimitMin, timeLimitSec, point, badgeSubject, badgeDescription):
+
     sio.emit('give_ox_quiz', {
         'data': {
             'classId': classId,
@@ -161,6 +162,62 @@ def get_quizResult(classId):
         return (quizArr, studentAnswerArr)
     else:
         return NULL
+
+
+@eel.expose
+def get_problemTable(classId, accessToken):
+    headers = {"Authorization": "Bearer %s" % accessToken}
+    data = {classId: classId}
+    response = requests.get(
+        'http://13.125.141.137:3000/api/quiz?classId=%d' % classId, headers=headers)
+
+    return response.json()
+
+
+@eel.expose
+def saveOXQuiz(classId, teacherID, accessToken, problem, answer, timeLimitMin, timeLimitSec, point, badgeSubject, badgeDescription):
+    headers = {"Authorization": "Bearer %s" % accessToken}
+    data = {
+        'classId': classId,
+        'teacherID': teacherID,
+        'isOX': True,
+        'problem': problem,
+        'choice': ["O", "X"],
+        'answer': answer,
+        'timeLimitMin': timeLimitMin,
+        'timeLimitSec': timeLimitSec,
+        'point': point,
+        'badgeSubject': badgeSubject,
+        'badgeDescription': badgeDescription
+    }
+
+    response = requests.post(
+        'http://13.125.141.137:3000/api/quiz', data=data, headers=headers)
+
+    print('save ox quiz')
+
+
+@eel.expose
+def saveChoiceQuiz(classId, teacherID, accessToken, problem, multiChoices, answer, timeLimitMin, timeLimitSec, point, badgeSubject, badgeDescription):
+    headers = {"Authorization": "Bearer %s" % accessToken}
+    data = {
+        'classId': classId,
+        'teacherID': teacherID,
+        'isOX': False,
+        'problem': problem,
+        'choice': multiChoices,
+        'answer': answer,
+        'timeLimitMin': timeLimitMin,
+        'timeLimitSec': timeLimitSec,
+        'point': point,
+        'badgeSubject': badgeSubject,
+        'badgeDescription': badgeDescription
+    }
+
+    response = requests.post(
+        'http://13.125.141.137:3000/api/quiz', data=data, headers=headers)
+
+    print('save multi-choice quiz')
 
 
 eel.start('index.html', port=1090)

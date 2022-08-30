@@ -52,3 +52,26 @@ document.getElementById('submitBtn').addEventListener('click', () => {
   // eel.giveChoiceQuiz(classId,teacherId,accessToken, problem, multiChoices, answer, timeLimitMin, timeLimitSec, point, badge);
   eel.giveChoiceQuiz(classId,teacherId,accessToken, problem, multiChoices, answer, timeLimitMin, timeLimitSec, point, badgeSubject, badgeDescription);
 });
+
+document.getElementById('saveBtn').addEventListener('click', () => {
+  console.log('saveBtn clicked');
+
+  var classId = JSON.parse(localStorage.getItem('classId'));
+  var teacherID = JSON.parse(localStorage.getItem('teacherID'));
+  var accessToken = JSON.parse(localStorage.getItem('accessToken'));
+  var problem = document.getElementById('quiz').value;
+  var answerElem = document.getElementById('answer');
+  var answer = answerElem.options[answerElem.selectedIndex].value;
+  var timeLimitMin = document.getElementById('time-limit-min').value;
+  var timeLimitSec = document.getElementById('time-limit-sec').value;
+  var point = document.getElementById('point').value;
+  var badgeSubject =document.getElementById('badge_input1').value;
+  var badgeDescription = document.getElementById('badge_input2').value;
+  var multiChoices = []; 
+  var multiChoicesDoc = document.getElementsByClassName('multiple-choice-content');
+  for(var i=0; i<multiChoicesDoc.length; i++){
+    multiChoices.push(multiChoicesDoc[i].value);
+  }
+
+  eel.saveChoiceQuiz(classId, teacherID, accessToken, problem, multiChoices, answer, timeLimitMin, timeLimitSec, point, badgeSubject, badgeDescription);
+});
