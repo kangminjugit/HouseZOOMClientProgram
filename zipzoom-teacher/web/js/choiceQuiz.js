@@ -74,4 +74,6 @@ document.getElementById('saveBtn').addEventListener('click', () => {
   }
 
   eel.saveChoiceQuiz(classId, teacherID, accessToken, problem, multiChoices, answer, timeLimitMin, timeLimitSec, point, badgeSubject, badgeDescription);
+
+  alert('퀴즈가 저장되었습니다!');
 });

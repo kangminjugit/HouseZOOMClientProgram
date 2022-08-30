@@ -26,4 +26,6 @@ document.getElementById('saveBtn').addEventListener('click', () => {
   var badgeDescription = document.getElementById('badge_input2').value;
 
   eel.saveOXQuiz(classId,teacherID,accessToken, problem, answer, timeLimitMin, timeLimitSec, point, badgeSubject, badgeDescription);
+
+  alert('퀴즈가 저장되었습니다!');
 });
