@@ -130,7 +130,7 @@ class Character:
     def __init__(self, studentId, accessToken):
         headers = {"Authorization": "Bearer %s" % accessToken}
         response = requests.get(
-            'http://3.35.141.211:3000/api/avatar/cur-item?studentId={}'.format(studentId), headers=headers).json()
+            'http://13.125.141.137:3000/api/avatar/cur-item?studentId={}'.format(studentId), headers=headers).json()
 
         itemArr = response['data']['items']
 
